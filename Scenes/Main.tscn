@@ -1,0 +1,140 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://Scenes/Bee.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Honeycomb.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Flower.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scripts/Label.gd" type="Script" id=4]
+[ext_resource path="res://Scripts/Flower.gd" type="Script" id=5]
+[ext_resource path="res://ARIAL.TTF" type="DynamicFontData" id=6]
+[ext_resource path="res://Scripts/Panel.gd" type="Script" id=7]
+[ext_resource path="res://Sprites/BG.png" type="Texture" id=8]
+[ext_resource path="res://Scenes/Honey.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Scenes/Click_Effect.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scripts/Main.gd" type="Script" id=11]
+[ext_resource path="res://Scenes/Ant.tscn" type="PackedScene" id=12]
+
+[sub_resource type="DynamicFont" id=1]
+size = 8
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 8
+font_data = ExtResource( 6 )
+
+[sub_resource type="Curve2D" id=3]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 72, 0, 0, 0, 0, 0, 304, 0, 0, 0, 0, 0, 304, 200, 0, 0, 0, 0, 72, 200, 0, 0, 0, 0, 72, 0 )
+}
+
+[node name="Main_Scene" type="Node2D"]
+script = ExtResource( 11 )
+ant_scene = ExtResource( 12 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_right = 304.0
+margin_bottom = 200.0
+texture = ExtResource( 8 )
+expand = true
+stretch_mode = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Flower" parent="." instance=ExtResource( 3 )]
+position = Vector2( 112, 123 )
+script = ExtResource( 5 )
+
+[node name="Honeycomb" parent="." instance=ExtResource( 2 )]
+position = Vector2( 261, 76 )
+
+[node name="Bee" parent="." instance=ExtResource( 1 )]
+position = Vector2( 210, 110 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 76.0
+margin_top = 3.0
+margin_right = 221.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 1 )
+text = "History"
+align = 1
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+margin_right = 72.0
+margin_bottom = 200.0
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+honey_scene = ExtResource( 9 )
+click_effect = ExtResource( 10 )
+
+[node name="honey_btn" type="Button" parent="Panel"]
+margin_top = 32.0
+margin_right = 72.0
+margin_bottom = 52.0
+custom_fonts/font = SubResource( 2 )
+text = "Honey"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ant_btn" type="Button" parent="Panel"]
+margin_top = 52.0
+margin_right = 72.0
+margin_bottom = 72.0
+custom_fonts/font = SubResource( 2 )
+disabled = true
+text = "???"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="\?\?\?_btn" type="Button" parent="Panel"]
+margin_top = 72.0
+margin_right = 72.0
+margin_bottom = 92.0
+custom_fonts/font = SubResource( 2 )
+disabled = true
+text = "???"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Garden_Screen" type="Path2D" parent="."]
+curve = SubResource( 3 )
+
+[node name="Spawn_Location" type="PathFollow2D" parent="Garden_Screen"]
+position = Vector2( 72, 0 )
+
+[node name="Flower2" parent="." instance=ExtResource( 3 )]
+position = Vector2( 184, 175 )
+
+[node name="Flower3" parent="." instance=ExtResource( 3 )]
+position = Vector2( 185, 27 )
+
+[node name="Flower4" parent="." instance=ExtResource( 3 )]
+position = Vector2( 152, 77 )
+
+[node name="Flower5" parent="." instance=ExtResource( 3 )]
+position = Vector2( 225, 137 )
+
+[node name="Flower6" parent="." instance=ExtResource( 3 )]
+position = Vector2( 279, 161 )
+
+[node name="Flower7" parent="." instance=ExtResource( 3 )]
+position = Vector2( 97, 23 )
+
+[node name="Flower8" parent="." instance=ExtResource( 3 )]
+position = Vector2( 269, 30 )
+
+[node name="Flower9" parent="." instance=ExtResource( 3 )]
+position = Vector2( 91, 186 )
+
+[connection signal="give_honey" from="Bee" to="Panel" method="_on_Bee_give_honey"]
+[connection signal="update_history" from="Bee" to="Label" method="_on_Bee_update_history"]
+[connection signal="pressed" from="Panel/honey_btn" to="Panel" method="_on_honey_btn_pressed"]
