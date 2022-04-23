@@ -51,13 +51,15 @@ func collect_pollen_state(delta):
 	else:
 		var event =  "The bee is collecting pollen"
 		emit_signal("update_history", event)
+		$AnimationPlayer.play("RESET")
 		$ProgressBar.value = progress
 		$ProgressBar.visible = true
 		progress += min(0.5, $ProgressBar.max_value)
-		$AnimationPlayer.playback_speed = 0
+		#$AnimationPlayer.playback_speed = 0
 		
 		if progress >= $ProgressBar.max_value:
-			$AnimationPlayer.playback_speed = 1
+			#$AnimationPlayer.playback_speed = 1
+			$AnimationPlayer.play("weggle")
 			state = BACKING_TO_HIVE
 		
 func backing_to_hive_state(delta):
