@@ -1,4 +1,5 @@
 extends StaticBody2D
+class_name Flower
 
 export (float) var MAX_POLLEN:float = 60 
 export (float) var POLLEN_REGEN_RATE:float = 1

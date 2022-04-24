@@ -106,6 +106,9 @@ position = Vector2( 72, 0 )
 [node name="Flower4" parent="." instance=ExtResource( 3 )]
 position = Vector2( 88, 83 )
 
+[node name="Flower5" parent="." instance=ExtResource( 3 )]
+position = Vector2( 100, 72 )
+
 [connection signal="give_honey" from="Bee" to="Panel" method="_on_Bee_give_honey"]
 [connection signal="update_history" from="Bee" to="Label" method="_on_Bee_update_history"]
 [connection signal="pressed" from="Panel/honey_btn" to="Panel" method="_on_honey_btn_pressed"]
