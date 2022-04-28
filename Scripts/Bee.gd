@@ -44,10 +44,11 @@ func _on_Vision_body_entered(body):
 			state = COLLECT_POLLEN
 
 func collect_pollen_state(delta):
-	var distance = 7
+	var distance = 1
 	if position.distance_to(flower_positon) > distance:
 		velocity = position.direction_to(flower_positon) * speed
 		move_and_slide(velocity)
+#		print(position.distance_to(flower_positon))
 	else:
 		var event =  "The bee is collecting pollen"
 		emit_signal("update_history", event)
@@ -59,7 +60,7 @@ func collect_pollen_state(delta):
 		
 		if progress >= $ProgressBar.max_value:
 			#$AnimationPlayer.playback_speed = 1
-			$AnimationPlayer.play("weggle")
+			#$AnimationPlayer.play("weggle")
 			state = BACKING_TO_HIVE
 		
 func backing_to_hive_state(delta):

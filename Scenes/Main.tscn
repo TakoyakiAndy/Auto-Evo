@@ -36,12 +36,6 @@ texture = ExtResource( 8 )
 expand = true
 stretch_mode = 2
 
-[node name="Honeycomb" parent="." instance=ExtResource( 2 )]
-position = Vector2( 261, 76 )
-
-[node name="Bee" parent="." instance=ExtResource( 1 )]
-position = Vector2( 261, 67 )
-
 [node name="Label" type="Label" parent="."]
 margin_left = 76.0
 margin_top = 3.0
@@ -71,9 +65,6 @@ margin_right = 72.0
 margin_bottom = 52.0
 custom_fonts/font = SubResource( 2 )
 text = "Honey"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="ant_btn" type="Button" parent="Panel"]
 margin_top = 52.0
@@ -103,12 +94,20 @@ curve = SubResource( 3 )
 [node name="Spawn_Location" type="PathFollow2D" parent="Garden_Screen"]
 position = Vector2( 72, 0 )
 
-[node name="Flower4" parent="." instance=ExtResource( 3 )]
-position = Vector2( 88, 83 )
+[node name="YSort" type="YSort" parent="."]
 
-[node name="Flower5" parent="." instance=ExtResource( 3 )]
-position = Vector2( 100, 72 )
+[node name="Bee" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 261, 67 )
 
-[connection signal="give_honey" from="Bee" to="Panel" method="_on_Bee_give_honey"]
-[connection signal="update_history" from="Bee" to="Label" method="_on_Bee_update_history"]
+[node name="Flower4" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 94, 56 )
+
+[node name="Flower5" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 91, 36 )
+
+[node name="Honeycomb" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( 261, 76 )
+
 [connection signal="pressed" from="Panel/honey_btn" to="Panel" method="_on_honey_btn_pressed"]
+[connection signal="give_honey" from="YSort/Bee" to="Panel" method="_on_Bee_give_honey"]
+[connection signal="update_history" from="YSort/Bee" to="Label" method="_on_Bee_update_history"]
