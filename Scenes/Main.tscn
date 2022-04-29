@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/Bee.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/Honeycomb.tscn" type="PackedScene" id=2]
@@ -12,61 +12,50 @@
 [ext_resource path="res://scripts/Main.gd" type="Script" id=11]
 [ext_resource path="res://scenes/Ant.tscn" type="PackedScene" id=12]
 
-[sub_resource type="DynamicFont" id=1]
-size = 8
-font_data = ExtResource( 6 )
-
 [sub_resource type="DynamicFont" id=2]
 size = 8
 font_data = ExtResource( 6 )
 
-[sub_resource type="Curve2D" id=3]
-_data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 72, 0, 0, 0, 0, 0, 304, 0, 0, 0, 0, 0, 304, 200, 0, 0, 0, 0, 72, 200, 0, 0, 0, 0, 72, 0 )
-}
+[sub_resource type="DynamicFont" id=1]
+size = 8
+font_data = ExtResource( 6 )
 
 [node name="Main_Scene" type="Node2D"]
 script = ExtResource( 11 )
 ant_scene = ExtResource( 12 )
 
-[node name="TextureRect" type="TextureRect" parent="."]
-margin_right = 304.0
-margin_bottom = 200.0
+[node name="BG" type="Sprite" parent="."]
 texture = ExtResource( 8 )
-expand = true
-stretch_mode = 2
+region_enabled = true
+region_rect = Rect2( 0, 0, 640, 368 )
 
-[node name="Label" type="Label" parent="."]
-margin_left = 76.0
-margin_top = 3.0
-margin_right = 221.0
-margin_bottom = 23.0
-custom_fonts/font = SubResource( 1 )
-text = "History"
-align = 1
-script = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Panel" type="Panel" parent="."]
-margin_right = 72.0
-margin_bottom = 200.0
+[node name="Control" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/margin_right = 245
+
+[node name="Panel" type="Panel" parent="CanvasLayer/Control/MarginContainer"]
+margin_right = 75.0
+margin_bottom = 180.0
+size_flags_vertical = 3
 script = ExtResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 honey_scene = ExtResource( 9 )
 click_effect = ExtResource( 10 )
 
-[node name="honey_btn" type="Button" parent="Panel"]
+[node name="honey_btn" type="Button" parent="CanvasLayer/Control/MarginContainer/Panel"]
 margin_top = 32.0
 margin_right = 72.0
 margin_bottom = 52.0
 custom_fonts/font = SubResource( 2 )
 text = "Honey"
 
-[node name="ant_btn" type="Button" parent="Panel"]
+[node name="ant_btn" type="Button" parent="CanvasLayer/Control/MarginContainer/Panel"]
 margin_top = 52.0
 margin_right = 72.0
 margin_bottom = 72.0
@@ -77,7 +66,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="\?\?\?_btn" type="Button" parent="Panel"]
+[node name="\?\?\?_btn" type="Button" parent="CanvasLayer/Control/MarginContainer/Panel"]
 margin_top = 72.0
 margin_right = 72.0
 margin_bottom = 92.0
@@ -88,11 +77,15 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Garden_Screen" type="Path2D" parent="."]
-curve = SubResource( 3 )
-
-[node name="Spawn_Location" type="PathFollow2D" parent="Garden_Screen"]
-position = Vector2( 72, 0 )
+[node name="Label" type="Label" parent="."]
+margin_left = 76.0
+margin_top = 3.0
+margin_right = 221.0
+margin_bottom = 23.0
+custom_fonts/font = SubResource( 1 )
+text = "History"
+align = 1
+script = ExtResource( 4 )
 
 [node name="YSort" type="YSort" parent="."]
 
@@ -108,6 +101,6 @@ position = Vector2( 91, 36 )
 [node name="Honeycomb" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 261, 76 )
 
-[connection signal="pressed" from="Panel/honey_btn" to="Panel" method="_on_honey_btn_pressed"]
-[connection signal="give_honey" from="YSort/Bee" to="Panel" method="_on_Bee_give_honey"]
+[connection signal="pressed" from="CanvasLayer/Control/MarginContainer/Panel/honey_btn" to="CanvasLayer/Control/MarginContainer/Panel" method="_on_honey_btn_pressed"]
+[connection signal="give_honey" from="YSort/Bee" to="CanvasLayer/Control/MarginContainer/Panel" method="_on_Bee_give_honey"]
 [connection signal="update_history" from="YSort/Bee" to="Label" method="_on_Bee_update_history"]
