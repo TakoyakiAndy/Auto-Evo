@@ -96,11 +96,9 @@ position = Vector2( 261, 67 )
 position = Vector2( 94, 56 )
 
 [node name="Flower5" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 91, 36 )
+position = Vector2( 249, 38 )
 
 [node name="Honeycomb" parent="YSort" instance=ExtResource( 2 )]
 position = Vector2( 261, 76 )
 
 [connection signal="pressed" from="CanvasLayer/Control/MarginContainer/Panel/honey_btn" to="CanvasLayer/Control/MarginContainer/Panel" method="_on_honey_btn_pressed"]
-[connection signal="give_honey" from="YSort/Bee" to="CanvasLayer/Control/MarginContainer/Panel" method="_on_Bee_give_honey"]
-[connection signal="update_history" from="YSort/Bee" to="Label" method="_on_Bee_update_history"]

@@ -11,8 +11,6 @@ onready var blackboard = BLACKBOARD.new()
 func _ready():
 	tree = self
 	actor = get_parent()
-	print(actor)
-	print(get_parent())
 	start()
 	status = RUNNING
 
